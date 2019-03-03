@@ -5,25 +5,22 @@ import Title from "./components/Title";
 import "./App.css";
 import characterArray from "./characterArray";
 
-let maxScore = 0;
-
 export default class App extends Component {
-  state = {
+  constructor() {
+    super();
+    this.state = {
     characterArray,
-    score: 0
-    // maxScore: 0
+    score: 0,
+    maxScore: 0,
   };
-
-  // componentDidMount() {
-  //   this.shuffleArray()
-  // }
+  }
 
   handleIncrement = () => {
     this.setState({ score: this.state.score + 1 })
-      if (this.state.score >= maxScore) {
-        // this.setState({ maxScore: this.state.maxScore + 1 })
-        maxScore++
+      if (this.state.score >= this.state.maxScore) {
+        this.setState({ maxScore: this.state.maxScore + 1 })
       }
+      console.log(this.state);
   } 
 
   startGame = () => {
@@ -41,12 +38,12 @@ export default class App extends Component {
     }
     this.setState({ characterArray })
   }
-  
+
   render() {
     return (
       <Wrapper>
         <Title>The Simpsons Characters
-        <p>score: {this.state.score} Top score: {maxScore} </p>
+        <p>score: {this.state.score} Top score: {this.state.maxScore} </p>
           </Title> 
         {this.state.characterArray.map(character => (
           <CharacterCard
@@ -55,10 +52,9 @@ export default class App extends Component {
           key={character.id}
           image={character.image}
           name={character.name}
-          onClick={() => console.log(`clicked`)}
           thisId={() => console.log(character.id)}
           />
-          ))}
+        ))}
       </Wrapper>
     );
   }
