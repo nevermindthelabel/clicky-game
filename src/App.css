@@ -11,10 +11,8 @@ body,
   height: 100vh;
 }
 
-.container-fluid {
-  display: flex;
+div.wrapper {
   background-image: url(./components/images/background/theSimpsonsFamily.jpg);
-  height: 100vh;
 }
 
 .container-fluid > .card {
@@ -28,11 +26,12 @@ body,
   text-align: left;
 }
 
-.card > .img-container {
-  height: 60%;
+img {
+  height: 250px;
+  width: 175px;
   overflow: hidden;
   text-align: center;
-  background: #6caddc;
+  /* background: #6caddc; */
 }
 .card > .img-container > img {
   width: 60%;
