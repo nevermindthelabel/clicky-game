@@ -37,9 +37,7 @@ export default class App extends Component {
     this.setState({ 
       clickedArray: [...this.state.clickedArray, id]
      })
-     console.log(this.state.clickedArray);
      if (this.state.clickedArray.indexOf(id) !== -1){
-       console.log('game over');
        this.startGame()
      } else {
       this.handleIncrement();
@@ -73,8 +71,3 @@ export default class App extends Component {
     );
   }
 }
-/* TODO
-  if user clicks the same image twice
-  then....
-  set score to 0
-*/
