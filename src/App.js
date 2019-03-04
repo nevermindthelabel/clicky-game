@@ -13,7 +13,7 @@ export default class App extends Component {
       characterArray,
       score: 0,
       maxScore: 0,
-      clickedArray: []
+      clickedArray: [],
     };
   }
 
@@ -22,30 +22,36 @@ export default class App extends Component {
     this.setState({ score: this.state.score + 1 })
       if (this.state.score >= this.state.maxScore) {
         this.setState({ maxScore: this.state.maxScore + 1 })
-      }
+      } 
   } 
 
   startGame = () => {
-    this.setState({ score: this.state.score })
+    this.setState({
+      score: 0,
+      maxScore: this.state.maxScore,
+      clickedArray: []
+     })
   }
   
   shuffleArray = (id) => {
-    this.state.clickedArray.push(id)
-    console.log(this.state.clickedArray);
-    // console.log(this.state.clickedArray.indexOf(id));
-      // if (this.state.clickedArray.includes(id)) {
-      // console.log('game over');
-      // // this.startGame();
-    // } else 
-    this.handleIncrement();
-    let lastIndex = characterArray.length - 1;
-    for (; lastIndex > 0; lastIndex--) {
+    this.setState({ 
+      clickedArray: [...this.state.clickedArray, id]
+     })
+     console.log(this.state.clickedArray);
+     if (this.state.clickedArray.indexOf(id) !== -1){
+       console.log('game over');
+       this.startGame()
+     } else {
+      this.handleIncrement();
+      let lastIndex = characterArray.length - 1;
+      for (; lastIndex > 0; lastIndex--) {
       const randomIndex = Math.floor(Math.random() * (lastIndex + 1));
       const temp = characterArray[lastIndex];
       characterArray[lastIndex] = characterArray[randomIndex];
       characterArray[randomIndex] = temp;
     }
     this.setState({ characterArray })
+  }
   }
 
   render() {
