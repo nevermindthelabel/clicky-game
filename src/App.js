@@ -6,28 +6,37 @@ import "./App.css";
 import characterArray from "./characterArray";
 
 export default class App extends Component {
+
   constructor() {
-    super();
-    this.state = {
-    characterArray,
-    score: 0,
-    maxScore: 0,
-  };
+      super();
+      this.state = {
+      characterArray,
+      score: 0,
+      maxScore: 0,
+      clickedArray: []
+    };
   }
+
 
   handleIncrement = () => {
     this.setState({ score: this.state.score + 1 })
       if (this.state.score >= this.state.maxScore) {
         this.setState({ maxScore: this.state.maxScore + 1 })
       }
-      console.log(this.state);
   } 
 
   startGame = () => {
     this.setState({ score: this.state.score })
   }
   
-  shuffleArray = () => {
+  shuffleArray = (id) => {
+    this.state.clickedArray.push(id)
+    console.log(this.state.clickedArray);
+    // console.log(this.state.clickedArray.indexOf(id));
+      // if (this.state.clickedArray.includes(id)) {
+      // console.log('game over');
+      // // this.startGame();
+    // } else 
     this.handleIncrement();
     let lastIndex = characterArray.length - 1;
     for (; lastIndex > 0; lastIndex--) {
@@ -52,7 +61,6 @@ export default class App extends Component {
           key={character.id}
           image={character.image}
           name={character.name}
-          thisId={() => console.log(character.id)}
           />
         ))}
       </Wrapper>
