@@ -1,11 +1,9 @@
 import React from 'react';
 import './style.css';
 
-
-
 export default function CharacterCard(props) {
   return (
-    <div onClick={props.shuffleArray} className="card">
+    <div onClick={() => props.shuffleArray(props.id)} className="card">
       <img 
         data-id={props.id}
         src={props.image}
