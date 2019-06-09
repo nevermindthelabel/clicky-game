@@ -1,40 +1,40 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import CharacterCard from "./components/CharacterCard";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import "./App.css";
 import characterArray from "./characterArray";
 
-export default class App extends Component {
-  state = {
-    score: 0,
-    maxScore: 0,
-    clickedArray: []
-  };
+const App = props => {
+  const [score, setScore] = useState(0);
 
-  handleIncrement = () => {
-    this.setState({ score: this.state.score + 1 });
-    if (this.state.score >= this.state.maxScore) {
-      this.setState({ maxScore: this.state.maxScore + 1 });
+  const [maxScore, setMaxScore] = useState(0);
+
+  const [clickedArray, setClickedArray] = useState([]);
+
+  const handleIncrement = () => {
+    setScore(score + 1);
+    if (score >= maxScore) {
+      setMaxScore(maxScore + 1);
     }
   };
 
-  startGame = () => {
-    this.setState({
-      score: 0,
-      maxScore: this.state.maxScore,
-      clickedArray: []
-    });
+  const startGame = () => {
+    setScore(0);
+    setMaxScore(maxScore);
+    setClickedArray([]);
   };
 
-  shuffleArray = id => {
-    this.setState({
-      clickedArray: [...this.state.clickedArray, id]
-    });
-    if (this.state.clickedArray.indexOf(id) !== -1) {
-      this.startGame();
+  const shuffleArray = id => {
+    setClickedArray([
+      ...clickedArray,
+      id
+    ]);
+
+    if (clickedArray.indexOf(id) !== -1) {
+      startGame();
     } else {
-      this.handleIncrement();
+      handleIncrement();
       let lastIndex = characterArray.length - 1;
       for (; lastIndex > 0; lastIndex--) {
         const randomIndex = Math.floor(Math.random() * (lastIndex + 1));
@@ -42,29 +42,33 @@ export default class App extends Component {
         characterArray[lastIndex] = characterArray[randomIndex];
         characterArray[randomIndex] = temp;
       }
-      this.setState({ characterArray });
     }
   };
 
-  render() {
-    return (
-      <Wrapper>
-        <Title>
-          The Simpsons Characters
-          <p>
-            score: {this.state.score} Top score: {this.state.maxScore}{" "}
-          </p>
-        </Title>
-        {characterArray.map(character => (
-          <CharacterCard
-            shuffleArray={this.shuffleArray}
-            id={character.id}
-            key={character.id}
-            image={character.image}
-            name={character.name}
-          />
-        ))}
-      </Wrapper>
-    );
-  }
-}
+
+  console.log(score, setScore);
+  console.log(maxScore, setMaxScore);
+  console.log(clickedArray, setClickedArray);
+
+  return (
+    <Wrapper>
+      <Title>
+        The Simpsons Characters
+        <p>
+          score: {score} Top score: {maxScore}{" "}
+        </p>
+      </Title>
+      {characterArray.map(character => (
+        <CharacterCard
+          shuffleArray={shuffleArray}
+          id={character.id}
+          key={character.id}
+          image={character.image}
+          name={character.name}
+        />
+      ))}
+    </Wrapper>
+  );
+};
+
+export default App;
