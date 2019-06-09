@@ -26,10 +26,7 @@ const App = props => {
   };
 
   const shuffleArray = id => {
-    setClickedArray([
-      ...clickedArray,
-      id
-    ]);
+    setClickedArray([...clickedArray, id]);
 
     if (clickedArray.indexOf(id) !== -1) {
       startGame();
@@ -44,11 +41,6 @@ const App = props => {
       }
     }
   };
-
-
-  console.log(score, setScore);
-  console.log(maxScore, setMaxScore);
-  console.log(clickedArray, setClickedArray);
 
   return (
     <Wrapper>
