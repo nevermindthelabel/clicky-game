@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-export default function CharacterCard(props) {
+const CharacterCard = props => {
   return (
     <div onClick={() => props.shuffleArray(props.id)} className="card">
       <img 
@@ -13,4 +13,6 @@ export default function CharacterCard(props) {
       />
     </div>
   );
-}
+};
+
+export default CharacterCard;
