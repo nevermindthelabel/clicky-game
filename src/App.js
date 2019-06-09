@@ -7,7 +7,6 @@ import characterArray from "./characterArray";
 
 export default class App extends Component {
   state = {
-    characterArray,
     score: 0,
     maxScore: 0,
     clickedArray: []
@@ -56,7 +55,7 @@ export default class App extends Component {
             score: {this.state.score} Top score: {this.state.maxScore}{" "}
           </p>
         </Title>
-        {this.state.characterArray.map(character => (
+        {characterArray.map(character => (
           <CharacterCard
             shuffleArray={this.shuffleArray}
             id={character.id}
